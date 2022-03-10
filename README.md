@@ -8,7 +8,7 @@ After been trained, the proposed model will be evaluaded on an unseed
  
 At the end some misclassified images will be ploted  for mistake analysis
 
-Requirements:
+# Requirements:
 -	Conda or Miniconda [optional] : for simple dependancies management
 -	cuda and cudnn [optional] : if you have a GPU and the corresponding driver installed
 -	Keras
