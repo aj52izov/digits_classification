@@ -15,7 +15,6 @@ At the end some misclassified images will be ploted  for mistake analysis
 -	Keras
 -	Tensorflow 
 -	matplotlib
--	seaborn
 
 # installation :
 ##  create and activate the working environment:
@@ -30,7 +29,6 @@ At the end some misclassified images will be ploted  for mistake analysis
 -	pip install keras==2.6.0
 -	pip install tensorflow-addons
 -	pip install matplotlib
--	pip install seaborn
 
 ##  clone the project: 
 - you can use TortoiseGit(simple) or git the git command 
