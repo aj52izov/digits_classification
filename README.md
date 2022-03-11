@@ -46,8 +46,8 @@ divided into 60,000 samples(images,labels) for training and 10,000 samples for t
 To train and evaluate the model, just run the "trainer.py" file.
 The default training epoch is 30, after what the trained model is saved by default in 
 "trained_model/model.h5"
-Note : The model architecture , the confusion matrix and the training evolution curves 
-are stored by default in trained_model folder too.
+Note : The model architecture , the confusion matrix, the training evolution curves and
+a picture showing some missclassified images are stored by default in trained_model folder too.
 
 # Prediction :
 To make a prediction, the function predict in "predictor.py" file must be applied on 

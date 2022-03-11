@@ -1,11 +1,11 @@
 import tensorflow as tf
 import model.model as ml
-import preprocessing.preprocessing as preprocessing
 import datasets.dataset as dts
 import os
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+import pdb
 
 def train(model, data, save_directory="trained_model", batch_size=32, epochs=30, optimizer="adam",
           loss="sparse_categorical_crossentropy", metrics=['accuracy']):
@@ -42,7 +42,8 @@ def train(model, data, save_directory="trained_model", batch_size=32, epochs=30,
 
 def evaluate(model, data, save_directory="trained_model", class_names=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]):
     """
-    evaluate the model on a data set and save the confusion matrix
+    evaluate the model on a dataset and save the confusion matrix as well as
+    some missclassified images
 
     :param model: the model to evaluated
     :param data: the validation dataset
@@ -55,6 +56,26 @@ def evaluate(model, data, save_directory="trained_model", class_names=[0, 1, 2, 
     y_test = data[1]
     predict = model.predict(data[0])
     y_pred = tf.argmax(predict,1) # get predicted classes
+
+    miss_cl_idx = y_pred != y_test
+    miss_cl_img = x_test[miss_cl_idx]
+    miss_cl_label = y_pred[miss_cl_idx].numpy().tolist()
+    true_label = y_test[miss_cl_idx].tolist()
+
+    fig = plt.figure(figsize=(10, 10))
+    columns = 5
+    rows = 5
+    for i in range(1, columns * rows + 1):
+        img = miss_cl_img[i]
+        pre = miss_cl_label[i]
+        t = true_label[i]
+        fig.add_subplot(rows, columns, i)
+        plt.imshow(img)
+        plt.title("P:{},T:{}".format(str(pre), str(t)))
+        plt.axis('off')
+    plt.savefig(save_directory + "/miss_classified_images.png")
+    plt.close()
+
     confusion_mtx = tf.math.confusion_matrix(y_test, y_pred)
     ind = np.arange(len(class_names))
 
@@ -76,11 +97,6 @@ if __name__ == "__main__":
     print("Loadind data ")
     (x_train, y_train), (x_test, y_test) = dts.get_data()
 
-    # apply preprocessing
-    print("Applying filtering on data ")
-    x_train = preprocessing.apply(x_train)
-    x_test = preprocessing.apply(x_test)
-
     # get model pipeline
     print("getting model pipeline ")
     model = ml.make_pipeline()
@@ -91,6 +107,10 @@ if __name__ == "__main__":
 
     #evaluate the model
     print(" evaluating the model")
-    #model = tf.keras.models.load_model("model/my_model.h5")
+    #model = tf.keras.models.load_model("trained_model/model.h5")
     val_acc, val_loss = evaluate(model, (x_test, y_test))
+
+
+
+
 

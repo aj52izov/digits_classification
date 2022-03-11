@@ -1,7 +1,5 @@
 import tensorflow as tf
 import tensorflow.keras as keras
-import pdb
-
 
 def make_pipeline(input_shape=(28, 28), save_directory="trained_model"):
     """

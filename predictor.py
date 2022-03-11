@@ -1,6 +1,4 @@
 import tensorflow as tf
-import model.model as ml
-import preprocessing.preprocessing as preprocessing
 import datasets.dataset as dts
 
 def predict(model_file, data, class_names=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]):

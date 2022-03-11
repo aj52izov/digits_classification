@@ -2,6 +2,7 @@ import tensorflow as tf
 import collections
 import matplotlib.pyplot as plt
 import numpy as np
+
 def get_data():
     """
      get the dataset that will be used
